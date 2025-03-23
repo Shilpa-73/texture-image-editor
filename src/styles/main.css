@@ -1,0 +1,267 @@
+.main-wrap {
+    background-color: #dbdbdb;
+    background-color: #eaeaea;
+    flex-direction: column;
+    left: 0;
+    overflow-x: hidden;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+.flex-container {
+    display: flex;
+    height: 65px;
+    justify-content: flex-end;
+    margin: 15px 0;
+}
+.flex-container {
+    width: 380px;
+}
+
+.invite-main-wrap {
+    overflow: hidden;
+    padding: 0 5px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.invite-main-wrap, .main-wrap {
+    align-items: center;
+    display: flex
+;
+    height: 100%;
+}
+
+
+.download_section_touch {
+    background: #fbfbfb;
+        border-radius: 14px;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        position: absolute;
+        width: calc(100% - 18px);
+        z-index: 3;
+}
+
+.formattext-controller-main {
+    align-items: center;
+    display: flex
+;
+    height: 56px;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    z-index: 5;
+}
+
+
+.download_sub_section {
+    align-items: center;
+    display: flex
+;
+    justify-content: space-evenly;
+    max-width: 450px;
+    padding: 5px;
+    width: 100%;
+}
+
+
+.bottom-control-items, .formattext-control-items {
+    align-items: center;
+    cursor: pointer;
+    display: flex
+;
+    flex-direction: column;
+    height: 50px;
+    justify-content: space-evenly;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+.invite-main-wrap {
+    overflow: hidden;
+    padding: 0 5px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.invite-main-wrap, .main-wrap {
+    align-items: center;
+    display: flex
+;
+    height: 100%;
+}
+
+.invitation-shell {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+}
+
+.invite-container {
+    aspect-ratio: 5 / 7;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px !important;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+.invit-background-image {
+    -webkit-user-select: none;
+    user-select: none;
+}
+.invit-background-image {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, .08);
+    display: block;
+    pointer-events: none;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.pt-0{
+    padding-top: 0px !important;
+}
+
+
+.justify-center{
+    justify-content: center;
+}
+
+.text-content{
+    z-index: 2;
+}
+
+.outline-highlighter {
+    background: #aba8a81f;
+    outline: 1px dashed #585858 !important;
+    outline-offset: 4px;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: all .1s;
+}
+
+
+.next-btn-wrap {
+    align-items: center;
+    background-color: hsla(0, 0%, 48%, .08);
+    bottom: 0;
+    display: flex
+;
+    justify-content: space-between;
+    min-height: 60px;
+    padding: 0 .5rem;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.extra-menu-box {
+    align-items: center;
+    display: flex
+;
+    justify-content: space-evenly;
+    width: 300px;
+}
+
+.download_section_touch {
+    display: none;
+}
+
+@media (max-width: 1022px) {
+    .download_section_touch {
+        background: #fbfbfb;
+        border-radius: 14px;
+        bottom: 0;
+        display: flex
+;
+        justify-content: center;
+        margin-bottom: 10px;
+        position: absolute;
+        width: calc(100% - 18px);
+        z-index: 3;
+    }
+}
+
+@media (max-width: 1022px) {
+    .download_section_dsk {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 856px) {
+    .invitation-shell {
+        align-items: center;
+        display: flex
+;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        margin-top: 0px;
+        max-height: calc(100% - 150px);
+        position: relative;
+        text-align: center;
+        width: 100%;
+        overflow: hidden auto;
+    }
+}
+
+.invitation-shell {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+
+@media screen and (max-width: 766px) {
+    .formattext-controller-main {
+        background-color: rgb(255, 255, 255);
+        height: 75px;
+        left: 40px;
+        top: 0px;
+        width: calc(100% - 40px);
+        border-radius: 0px;
+        overflow: auto;
+    }
+}
+
+.add-photo-btn {
+    display: flex
+;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+.add_ext_txt_icn {
+    align-items: center;
+    background-image: radial-gradient(circle at 11% 50.4%, #ff9800 0, rgba(255, 0, 105, .72) 91%);
+    border-radius: 50%;
+    color: #fff;
+    display: flex
+;
+    font-family: "Noto Serif Vithkuqi";
+    font-size: 26px;
+    height: 30px;
+    justify-content: center;
+    width: 30px;
+}

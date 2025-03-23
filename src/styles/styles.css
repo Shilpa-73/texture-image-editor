@@ -1,0 +1,130 @@
+.formattext-control-box {
+    align-items: center;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .04);
+    color: #000;
+    display: flex
+;
+    height: 100%;
+    overflow: hidden;
+    padding: 4px 5px;
+    transition: .25s linear;
+}
+
+
+.formattext-control-items {
+    align-items: center;
+    cursor: pointer;
+    display: flex
+;
+    flex-direction: column;
+    height: 50px;
+    justify-content: space-evenly;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.formattext-control-items {
+    background-color: #fff;
+    border-radius: 8px;
+    height: 100%;
+    margin-left: 3px;
+    margin-right: 0;
+    min-width: 65px;
+}
+
+.formattext-control-icon {
+    cursor: pointer;
+    height: 16px;
+}
+
+
+.formattext-control-icon-txt {
+    align-items: center;
+    color: #505050;
+    display: flex
+;
+    font-family: Roboto;
+    font-size: 11px;
+    font-weight: 500;
+    height: 14px;
+    text-shadow: 0 0 #505050;
+    white-space: pre;
+}
+
+.tool-tip-box {
+    bottom: 0;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+.css-1cn3yto {
+    box-sizing: border-box;
+    display: flex
+;
+    flex-flow: wrap;
+    width: 100%;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+
+.css-1wxaqej {
+    box-sizing: border-box;
+    margin: 0px;
+    flex-direction: row;
+}
+
+.hide-tooltip-btn {
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.mr-10{
+    margin-right: 10px;
+}
+
+.ml-10{
+    margin-left:10px;
+}
+
+.float-right{
+    float: right;
+}
+
+.custom-textarea {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentcolor;
+    padding: 0px;
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    height: auto;
+    margin: 0px;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0px;
+    width: 100%;
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    resize: none;
+}
+textarea {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    overflow: auto;
+    resize: none;
+    height: 184px !important;
+    text-align: center;
+}

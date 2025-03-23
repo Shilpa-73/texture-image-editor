@@ -1,0 +1,27 @@
+
+.Container {
+	/* width: 96%; */
+    border-radius: 6px;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    /* max-height: 92%; */
+}
+
+.Container img{
+    aspect-ratio: 5 / 7;
+}
+
+.Image {
+	object-fit: cover;
+	width: 40%;
+	height: 100%;
+}
+
+
+@media (min-width: 830px) {
+    .invite-container {
+        height: calc(100vh - 180px);
+        max-width: calc(71.428vh - 117.8562px);
+    }
+}
