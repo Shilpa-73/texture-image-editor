@@ -184,7 +184,7 @@ const TemplateEditor = ({image,fontFamily, router={query:{type:"Wedding"}}}) => 
   return (
     <>
     <div class="main-wrap" id="main-page">
-    <div class="flex-container"></div>
+    {/* <div class="flex-container"></div> */}
     <Header changeFontFamily={changeFontFamily}/>
     <div className="flex flex-col lg:flex-row w-full gap-6 p-4 pt-0  max-93 justify-center">
       <div className="image-editor-shell">

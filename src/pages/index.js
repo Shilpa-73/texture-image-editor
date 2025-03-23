@@ -66,7 +66,7 @@ export default function Home() {
           <div class="container d-flex justify-content-between">
             <a href="#" class="navbar-brand d-flex align-items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-              <strong>Texture Image Editor</strong>
+              <strong> Texture Image Editor</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -78,7 +78,7 @@ export default function Home() {
 
   <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading">Choose Background</h1>
+      <h1 class="jumbotron-heading"><b>Choose Background</b></h1>
       <p class="lead text-muted">select a background and edit text for your invitations</p>
     </div>
   </section>
@@ -97,7 +97,7 @@ export default function Home() {
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" onClick={(bg)=>useTemplate(bg)}>Use this template</button>
+                  <button type="button" class="btn btn-sm btn-secondary" onClick={(bg)=>useTemplate(bg)}>Use this template</button>
                 </div>
               </div>
             </div>

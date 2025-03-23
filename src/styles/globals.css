@@ -45,7 +45,7 @@ a {
 
 .Container {
 	/* width: 96%; */
-    border-radius: 6px;
+    /* border-radius: 6px; */
     overflow: hidden;
     justify-content: center;
     display: flex;
@@ -54,6 +54,11 @@ a {
 
 .Container img{
     aspect-ratio: 5 / 7;
+    color: transparent;
+    width: calc(100% - 40px);
+    height: calc(100dvh - 90px);
+    margin-top: 90px;
+    object-fit: cover;
 }
 
 .Image {
@@ -1048,9 +1053,14 @@ textarea {
     gap: 0;
     flex-direction: column;
 }
-  .list-group.list-group-numbered {
-      z-index: 2;
-  }
+.list-group.list-group-numbered {
+  z-index: 5;
+  left: 0 !important;
+  max-width: 300px !important;
+  right: 0;
+  margin: 0 auto;
+  width: 100%;
+}
   .image-editor-shell .Container img {
       aspect-ratio: unset;
       height: 100%;
@@ -1085,6 +1095,12 @@ textarea {
   .main-wrap .text-format-controller-main .text-format-control-box {
       overflow-x: auto;
   }
+
+  .react-colorful{
+    z-index: 5;
+    top: 100px;
+  }
+
 }
 
 @media (max-width: 767px) {

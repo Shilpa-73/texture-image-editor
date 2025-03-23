@@ -150,14 +150,7 @@ const Header = ({changeFontFamily=()=>{}}) => {
                         <div class="MuiGrid-root MuiGrid-container container-custom"><div class="MuiGrid-root MuiGrid-item container-custom-one"><span class="hide-tooltip-btn" aria-label="Make Text BOLD">touch</span></div></div></div></div>
                         
                         <FormatDropdown/>
-                    
-                    <div class="text-format-control-items gentle-shake">
-                    <FontAwesomeIcon icon={faBorderNone} />
-                    <div class="text-format-control-icon-txt only-center dropdown"><div>Border</div>
-                    </div>
-                    <div class="tool-tip-box"><div class="MuiGrid-root MuiGrid-container container-custom">
-                        <div class="MuiGrid-root MuiGrid-item container-custom-one">
-                            <span class="hide-tooltip-btn" aria-label="Add Border around Text">touch</span></div></div></div></div>
+                
                             
                     <div class="text-format-control-items gentle-shake" onClick={()=>setCapital()}>
                         <FontAwesomeIcon icon={faFont} />
