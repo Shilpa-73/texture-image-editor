@@ -6,20 +6,30 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import jsonData from '../../data/album.json';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSearchParams } from 'next/navigation'
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import PreviewImage from '@/components/PreviewImage';
+import PreviewImageOption from '@/components/PreviewImageOption';
 
+const TemplateEditor = ({}) => {
 
-const TemplateEditor = ({image,fontFamily, router={query:{type:"Wedding"}}}) => {
-
-  const occasion =  router.query.type;
-  console.log({image, occasion});
+  const params = useSearchParams();
+  const ref = useRef(null);
+  const occasion =   params.get('type') || 'Wedding';
 
   const [template, setTemplate] = useState('wedding1');
+  const [preview, setPreview] = useState(false);
+
   // const [occasion, setOccasion] = useState('wedding');
   const selectedOccasion = jsonData.find(d=>d.type===occasion);
+  const image = selectedOccasion.images[0].url;
+
+  
+  console.log({image, occasion,params});
   const [textElements, setTextElements] = useState(selectedOccasion.dummyText || [
-    { id: 1, content: 'Sarah & Michael', x: 200, y: 100, fontSize: 32, color: '#000000', dragging: false },
-    { id: 2, content: 'June 15, 2025', x: 200, y: 170, fontSize: 22, color: '#000000', dragging: false },
-    { id: 3, content: 'Rosewood Gardens', x: 200, y: 230, fontSize: 18, color: '#3a3a3a', dragging: false },
+    { id: 1, content: 'Sarah & Michael', x: 200, y: 100, fontSize: 32, color: '#000000', dragging: false, class:'' },
+    { id: 2, content: 'June 15, 2025', x: 200, y: 170, fontSize: 22, color: '#000000', dragging: false, class:'' },
+    { id: 3, content: 'Rosewood Gardens', x: 200, y: 230, fontSize: 18, color: '#3a3a3a', dragging: false, class:'' },
   ]);
   const [selectedElement, setSelectedElement] = useState(null);
   const editorRef = useRef(null);
@@ -180,21 +190,55 @@ const TemplateEditor = ({image,fontFamily, router={query:{type:"Wedding"}}}) => 
         )
       );
   }
-  
+
+  const setItalic = ()=>{
+    const selectedElement = document.querySelector('.image-text-outline-highlighter');
+        if (selectedElement) {
+            let stle = window.getComputedStyle(selectedElement);
+           
+            let fontStyle = stle.getPropertyValue('font-style');
+            console.log({existingStyle : stle, fontStyle});
+
+            if(fontStyle && fontStyle!=='normal'){
+                document.querySelector('.image-text-outline-highlighter').style.removeProperty('font-style');
+            }
+            else{
+                document.querySelector('.image-text-outline-highlighter').style.fontStyle = 'italic';
+            }
+        }
+        else {
+            alert('Please select element')
+        }
+  }
+
+  const disablePreviewFn = ()=>{
+    document.querySelector('.main-wrap').classList.remove('preview');
+    setPreview(false);
+  }
+
+  useEffect(()=>{
+    console.log({parentPreviewChanged : preview});
+  },[preview])
+
   return (
     <>
     <div class="main-wrap" id="main-page">
-    {/* <div class="flex-container"></div> */}
-    <Header changeFontFamily={changeFontFamily}/>
-    <div className="flex flex-col lg:flex-row w-full gap-6 p-4 pt-0  max-93 justify-center">
+    <div class="flex-container"></div>
+    <Header changeFontFamily={changeFontFamily} setItalic={setItalic} preview={preview} selectedElement={selectedElement}/>
+    <div className="invite-main-wrap">
       <div className="image-editor-shell">
         <div 
           id='invitation-card-main'
           ref={editorRef}
           className="relative overflow-hidden image-container" >
-           
-
-          <TemplateImage image={image}/>
+          
+          {
+            !preview && <TemplateImage image={image}/>
+          }
+                    
+          {
+            preview && <PreviewImage image={image}/>
+          }
 
           {textElements.map(el => (
             <div
@@ -214,9 +258,12 @@ const TemplateEditor = ({image,fontFamily, router={query:{type:"Wedding"}}}) => 
             </div>
           ))}
         </div>
+        {
+          preview && <PreviewImageOption setParentPreview={disablePreviewFn}/>
+        }
       </div>
     </div>
-    <Footer addText={addTextElement}/>
+    <Footer addText={addTextElement} setParentPreview={setPreview}/>
     </div>
     </>
   );
