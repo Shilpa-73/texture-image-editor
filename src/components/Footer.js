@@ -76,16 +76,18 @@ const Footer = ({ addText = () => { }, setParentPreview = ()=>{} }) => {
             <div class="download_footer">
                 <div class="download_section">
                     <div class="footer-items">
-                        <div class="add-photo-btn">
+                        {/* <div class="add-photo-btn">
                             <div class="border-sty">
                                 <FontAwesomeIcon icon={faExpand} />
-                                <div class="text-format-control-icon-txt">Photo</div></div></div>
-                        {/* <div className="footer-items">
+                                <div class="text-format-control-icon-txt">Photo</div>
+                            </div>
+                        </div> */}
+                        <div className="footer-items" onClick={() => setShow(true)}>
                             <div class="add_ext_txt_icn">
                                 <div>+</div>
                             </div>
                             <div class="text-format-control-icon-txt">Add Text</div>
-                        </div> */}
+                        </div>
                         <div className='footer-items'>
                             <Button variant="success" className="float-right" onClick={() => setPreviewFn(true)}>
                                 <FontAwesomeIcon icon={faExpand} className="" title="Preview Image" /> Preview

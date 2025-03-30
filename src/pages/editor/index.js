@@ -10,6 +10,8 @@ import { useSearchParams } from 'next/navigation'
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import PreviewImage from '@/components/PreviewImage';
 import PreviewImageOption from '@/components/PreviewImageOption';
+import Draggable, {DraggableCore} from 'react-draggable'; // 
+
 
 const TemplateEditor = ({}) => {
 
@@ -34,6 +36,25 @@ const TemplateEditor = ({}) => {
   const [selectedElement, setSelectedElement] = useState(null);
   const editorRef = useRef(null);
   const [nextId, setNextId] = useState(selectedOccasion.dummyText.length+1);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      console.log({editorRef: editorRef})
+      // Access and manipulate myRef.current here
+      console.log("Ref is available:", editorRef.current);
+      const element = editorRef.current;
+
+      element.addEventListener("touchstart", handleTouchStart);
+      element.addEventListener("touchmove", handleTouchMove);
+      element.addEventListener("touchend", handleTouchEnd);
+      
+      return () => {
+        element.removeEventListener("touchstart", handleTouchStart);
+        element.removeEventListener("touchmove", handleTouchMove);
+        element.removeEventListener("touchend", handleTouchEnd);
+      };
+    }
+  }, []);
 
   // Template backgrounds with built-in images
   const templates = {
@@ -61,8 +82,41 @@ const TemplateEditor = ({}) => {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
+
+  const handleTouchStart = (e, id) => {
+    // Update the state to indicate which element is being dragged
+    setTextElements(elements => 
+      elements.map(el => 
+        el.id === id 
+          ? { ...el, dragging: true } 
+          : el
+      )
+    );
+    setSelectedElement(id);
+  };
+
   // Handle mouse move when dragging
   const handleMouseMove = (e) => {
+    if (editorRef.current) {
+      const editorRect = editorRef.current.getBoundingClientRect();
+      
+      setTextElements(elements => 
+        elements.map(el => {
+          if (el.dragging) {
+            // Calculate new position relative to the editor
+            const x = e.clientX - editorRect.left;
+            const y = e.clientY - editorRect.top;
+            
+            return { ...el, x, y };
+          }
+          return el;
+        })
+      );
+    }
+  };
+
+
+  const handleTouchMove = (e) => {
     if (editorRef.current) {
       const editorRect = editorRef.current.getBoundingClientRect();
       
@@ -91,6 +145,20 @@ const TemplateEditor = ({}) => {
     
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
+  };
+
+
+   // Handle mouse up (end of drag)
+   const handleTouchEnd = () => {
+    setTextElements(elements => 
+      elements.map(el => 
+        el.dragging ? { ...el, dragging: false } : el
+      )
+    );
+    
+    const element = editorRef.current;
+    element.removeEventListener("touchmove", handleTouchMove);
+    element.removeEventListener("touchend", handleTouchEnd);
   };
 
   // Add a new text element
@@ -220,6 +288,19 @@ const TemplateEditor = ({}) => {
     console.log({parentPreviewChanged : preview});
   },[preview])
 
+
+  const handleStart = (e)=>{
+    console.log('drag started',e);
+  }
+
+  const handleStop= (e)=>{
+    console.log('drag stopped',e);
+  }
+
+  const handleDrag= (e)=>{
+    console.log('dragging',e);
+  }
+
   return (
     <>
     <div class="main-wrap" id="main-page">
@@ -241,7 +322,7 @@ const TemplateEditor = ({}) => {
           }
 
           {textElements.map(el => (
-            <div
+           <div
               key={el.id}
               id={el.id}
               style={{
