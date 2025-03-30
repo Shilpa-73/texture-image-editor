@@ -7,10 +7,8 @@ import Footer from '../../components/Footer';
 import jsonData from '../../data/album.json';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSearchParams } from 'next/navigation'
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import PreviewImage from '@/components/PreviewImage';
 import PreviewImageOption from '@/components/PreviewImageOption';
-import Draggable, {DraggableCore} from 'react-draggable'; // 
 
 
 const TemplateEditor = ({}) => {
