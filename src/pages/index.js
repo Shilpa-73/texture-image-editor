@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 
 import jsonData from '../data/album.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 // import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -41,6 +43,8 @@ export default function Home() {
 
   return (
     <>
+
+    
 
       <Head>
         <title>Texture Image Editor</title>

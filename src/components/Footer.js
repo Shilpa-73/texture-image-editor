@@ -33,6 +33,11 @@ const Footer = ({ addText = () => { }, setParentPreview = ()=>{} }) => {
             document.querySelector('.main-wrap').classList.remove('preview');
            // document.querySelector('.Container').style.removeProperty('transform');
        }
+
+       document.querySelectorAll('.image-text-outline-highlighter').forEach(el=>{
+            el.classList.remove('image-text-outline-highlighter');
+       })
+
         setPreview(preview);
         setParentPreview(preview);
     }

@@ -151,7 +151,7 @@ const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElem
 
 
     const changeFontStyle = (cls)=>{
-        document.querySelector('.image-text-outline-highlighter').classList.add(cls);
+        // document.querySelector('.image-text-outline-highlighter').classList.add(cls);
         changeFontFamily(cls);
     }
 

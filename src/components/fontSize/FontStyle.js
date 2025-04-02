@@ -11,6 +11,9 @@ const fonts = [
     'fangsong'
 ]
 
+const fontStyles = [{
+  'font-family': 'Times, "Times New Roman", Georgia, serif'
+}]
 
 const FontStyle = ({text, changeFontStyle=()=>{}}) => {
 
@@ -18,7 +21,7 @@ const FontStyle = ({text, changeFontStyle=()=>{}}) => {
     <>
      <ListGroup as="ol" numbered>
         {
-            fonts.map(fontClass=>(<ListGroup.Item variant="light" 
+            fonts.map((fontClass,index)=>(<ListGroup.Item variant="light" 
                 as="li" 
                 onClick={()=>changeFontStyle(fontClass)}
                 className={`d-flex justify-content-between align-items-start ${fontClass}`}>{text}</ListGroup.Item>))

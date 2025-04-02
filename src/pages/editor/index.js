@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import TemplateImage from '../../components/TemplateImage';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -10,8 +10,15 @@ import { useSearchParams } from 'next/navigation'
 import PreviewImage from '@/components/PreviewImage';
 import PreviewImageOption from '@/components/PreviewImageOption';
 
+import Card from '@/components/card/card';
+import { DraggableBox } from '@/components/card/DraggableBox';
+import { ItemTypes } from  '../../components/card/ItemTypes';
+import { snapToGrid as doSnapToGrid } from '../../components/card/snapToGrid';
+import { useDrop } from 'react-dnd';
+import update from 'immutability-helper';
+import { CustomDragLayer } from '@/components/card/CustomDragLayer';
 
-const TemplateEditor = ({}) => {
+const TemplateEditor = ({snapToGrid=false}) => {
 
   const params = useSearchParams();
   const ref = useRef(null);
@@ -245,17 +252,23 @@ const TemplateEditor = ({}) => {
 
   const changeFontFamily = (fontFamily)=>{
       const id = document.querySelector('.image-text-outline-highlighter')?.getAttribute('id');
+
+      console.log({fontFamily});
+
       setTextElements(elements => 
         elements.map(el => 
           {
-              if(el.id === id){
+              if(Number(el.id) === Number(id)){
                 el.class = fontFamily;
+                console.log({fontFamilyUpdated: true});
               }
               return el;
           }
         )
       );
   }
+
+  // useEffect(()=>{},[textElements]);
 
   const setItalic = ()=>{
     const selectedElement = document.querySelector('.image-text-outline-highlighter');
@@ -286,17 +299,79 @@ const TemplateEditor = ({}) => {
     console.log({parentPreviewChanged : preview});
   },[preview])
 
+  const moveBox = useCallback(
+    (id, left, top) => {
 
-  const handleStart = (e)=>{
-    console.log('drag started',e);
+      console.log({id, left, top});
+
+      setTextElements(elements => 
+        elements.map(el => {
+          if (el.id===id) {
+            // Calculate new position relative to the editor
+            const x = left //e.clientX - editorRect.left;
+            const y = top //e.clientY - editorRect.top;
+            
+            return { ...el, x, y };
+          }
+          return el;
+        })
+      );
+    },
+    [textElements],
+  )
+
+  const [, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.BOX,
+      drop(item, monitor) {
+        const delta = monitor.getDifferenceFromInitialOffset();
+
+        let left = Math.round(item.left + delta.x)
+        let top = Math.round(item.top + delta.y)
+        if (snapToGrid) {
+          ;[left, top] = doSnapToGrid(left, top)
+        }
+
+        moveBox(item.id, left, top)
+        return undefined
+      },
+    }),
+    [moveBox],
+  )
+
+  const selectElement = (id)=>{
+
+    console.log({selectElementCalled: id});
+
+    setTextElements(elements => 
+      elements.map(el => {
+        if (el.id===id) {
+          let className = 'image-text-outline-highlighter';
+          return { ...el, class: `${el.class} ${className}` };
+        }
+        else{
+          let newClass = el.class && el.class.includes('image-text-outline-highlighter') ? (el.class.replace('image-text-outline-highlighter','')) : el.class;
+          console.log({newClass})
+          return {...el, class: newClass}
+        }
+       
+      })
+    );
   }
 
-  const handleStop= (e)=>{
-    console.log('drag stopped',e);
-  }
-
-  const handleDrag= (e)=>{
-    console.log('dragging',e);
+  const renderCard = (el,index)=>{
+    return (
+      <DraggableBox
+          key={el.id}
+          id={el.id}
+          top={el.y}
+          left={el.x}
+          onClick={selectElement}
+          className={el.class}
+          style={el.style}
+          title={el.content}
+        />
+    )
   }
 
   return (
@@ -306,9 +381,10 @@ const TemplateEditor = ({}) => {
     <Header changeFontFamily={changeFontFamily} setItalic={setItalic} preview={preview} selectedElement={selectedElement}/>
     <div className="invite-main-wrap">
       <div className="image-editor-shell">
+     
         <div 
           id='invitation-card-main'
-          ref={editorRef}
+          ref={drop}
           className="relative overflow-hidden image-container" >
           
           {
@@ -318,25 +394,14 @@ const TemplateEditor = ({}) => {
           {
             preview && <PreviewImage image={image}/>
           }
-
-          {textElements.map(el => (
-           <div
-              key={el.id}
-              id={el.id}
-              style={{
-                position: 'absolute',
-                left: `${el.x}px`,
-                top: `${el.y}px`,
-                fontSize: `${el.fontSize}`,
-                color: el.color,
-                cursor: 'move',
-              }}
-              className={`${el.class} ${el.dragging ? 'opacity-70' : ''} ${selectedElement === el.id ? 'image-text-outline-highlighter ring-blue-500 p-1' : ''} text-content`}
-              onMouseDown={(e) => handleMouseDown(e, el.id)}>
-              {el.content}
-            </div>
+          {textElements.map((el,i) => (
+           renderCard(el,i)
           ))}
         </div>
+
+        {
+          <CustomDragLayer snapToGrid={false} />
+        }
         {
           preview && <PreviewImageOption setParentPreview={disablePreviewFn}/>
         }
