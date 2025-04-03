@@ -196,6 +196,21 @@ const TemplateEditor = ({snapToGrid=false}) => {
       }
   }
 
+
+  const updateFontSize = (fontSize)=>{
+    console.log({fontSizeChanged: fontSize});
+
+      if(fontSize && document.querySelector('.image-text-outline-highlighter')){
+          const id = document.querySelector('.image-text-outline-highlighter').getAttribute('id');
+          
+          setTextElements(elements => 
+            elements.map(el => 
+              Number(el.id) === Number(id) ? { ...el, fontSize} : el
+            )
+          );
+      }
+  }
+
   const moveBox = useCallback(
     (id, left, top) => {
 
@@ -267,6 +282,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
           italic={el.italic}
           className={el.class}
           style={el.style}
+          fontSize={el.fontSize}
           color={el.color}
           textTransform={el.textTransform}
           title={el.content}
@@ -285,6 +301,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
     setTextTransform={setTextTransform}
     preview={preview} 
     closePopup={closePopup}
+    updateFontSize={updateFontSize}
     selectedElement={selectedElement}/>
     <div className="invite-main-wrap">
       <div className="image-editor-shell">

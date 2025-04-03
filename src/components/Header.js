@@ -12,7 +12,7 @@ import RangerSlider from './slider/RangerSlider';
 import FormatDropdown from './Dropdown/FormatDropdown';
 import FontStyle from './fontSize/FontStyle';
 
-const Header = ({closePopup,changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElement, setParentColor=()=>{}, setBoldText=()=>{},setTextTransform=()=>{}}) => {
+const Header = ({closePopup,changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElement, setParentColor=()=>{}, setBoldText=()=>{},setTextTransform=()=>{},updateFontSize=()=>{}}) => {
     const [selectedText,setSelectedText] = useState('');
     const [showColor, setShowColor] = useState(false);
     const [color, setColor] = useState("#aabbcc");
@@ -126,7 +126,8 @@ const Header = ({closePopup,changeFontFamily=()=>{},setItalic=()=>{}, preview, s
 
     const rangeDragEnd = (size)=>{
         console.log({newSize: size});
-        document.querySelector('.image-text-outline-highlighter').style.fontSize = size[1] + 'rem';
+        updateFontSize(size[1] + 'rem');
+        // document.querySelector('.image-text-outline-highlighter').style.fontSize = size[1] + 'rem';
     }
 
     const checkFontChange = (visible)=>{

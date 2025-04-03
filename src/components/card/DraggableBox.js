@@ -10,7 +10,7 @@ import { ItemTypes } from './ItemTypes'
 const  getStyles = (
   left,
   top,
-  isDragging,style, color='black',italic=false,textTransform='')=>
+  isDragging,style, color='black',italic=false,textTransform='',fontSize)=>
  {
   const transform = `translate3d(${left}px, ${top}px, 0)`
 
@@ -22,6 +22,10 @@ const  getStyles = (
 
   if(textTransform){
     newStylesToAdd['textTransform'] = textTransform;
+  }
+
+  if(fontSize){
+    newStylesToAdd['fontSize'] = fontSize
   }
 
   console.log({newStylesToAdd});
@@ -49,7 +53,7 @@ const  getStyles = (
 const  getTouchStyles = (
   left,
   top,
-  isDragging,style, color='black',italic=false,textTransform='')=>
+  isDragging,style, color='black',italic=false,textTransform='', fontSize)=>
  {
   // const transform = `translate3d(${left}px, ${top}px, 0)`
   const newStylesToAdd = {};
@@ -61,6 +65,10 @@ const  getTouchStyles = (
   
   if(textTransform){
     newStylesToAdd['textTransform'] = textTransform;
+  }
+
+  if(fontSize){
+    newStylesToAdd['fontSize'] = fontSize
   }
 
   console.log({newStylesToAdd});
@@ -89,7 +97,7 @@ const  getTouchStyles = (
 export const DraggableBox= memo(function DraggableBox(
   props,
 ) {
-  const { id, title, left, top, className, style,onClick, color, italic,textTransform } = props
+  const { id, title, left, top, className, style,onClick, color, italic,textTransform,fontSize } = props
   const [{ isDragging }, {html5: [html5Props, html5Drag], touch: [touchProps, touchDrag]}, preview] = useMultiDrag(
     () => ({
       type: ItemTypes.BOX,
@@ -112,7 +120,7 @@ export const DraggableBox= memo(function DraggableBox(
        <div
       ref={html5Drag}
       id={id}
-      style={getStyles(left, top, isDragging, style, color,italic,textTransform)}
+      style={getStyles(left, top, isDragging, style, color,italic,textTransform,fontSize)}
       class={className + ' full-view'}
       onClick={()=>onClick(id)}
       role="DraggableBox"
@@ -123,7 +131,7 @@ export const DraggableBox= memo(function DraggableBox(
     <div
       ref={touchDrag}
       id={id}
-      style={getTouchStyles(left, top, isDragging, style, color,italic,textTransform)}
+      style={getTouchStyles(left, top, isDragging, style, color,italic,textTransform,fontSize)}
       class={className  + ' mobile-view'}
       onClick={()=>onClick(id)}
       role="DraggableBox"
