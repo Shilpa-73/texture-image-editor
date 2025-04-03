@@ -24,6 +24,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
 
   const [template, setTemplate] = useState('wedding1');
   const [preview, setPreview] = useState(false);
+  const [closePopup, setClosePopup] = useState(false);
 
   // const [occasion, setOccasion] = useState('wedding');
   const selectedOccasion = jsonData.find(d=>d.type===occasion);
@@ -170,6 +171,13 @@ const TemplateEditor = ({snapToGrid=false}) => {
     console.log({parentPreviewChanged : preview});
   },[preview])
 
+
+  const clickImage = (e)=>{
+    console.log({imageClicked: e});
+    //CloseAllPopup;
+    setClosePopup(!closePopup);
+  }
+
   const setColor = (color)=>{
     console.log({colorChanged: color});
 
@@ -276,6 +284,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
     setParentColor={setColor}
     setTextTransform={setTextTransform}
     preview={preview} 
+    closePopup={closePopup}
     selectedElement={selectedElement}/>
     <div className="invite-main-wrap">
       <div className="image-editor-shell">
@@ -283,6 +292,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
         <div 
           id='invitation-card-main'
           ref={html5Drop}
+          onClick={clickImage}
           className="full-view relative overflow-hidden image-container" >
           
           {
@@ -300,6 +310,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
         <div 
           id='invitation-card-main'
           ref={touchDrop}
+          onClick={clickImage}
           className="mobile-view relative overflow-hidden image-container" >
           
           {

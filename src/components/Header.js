@@ -12,7 +12,7 @@ import RangerSlider from './slider/RangerSlider';
 import FormatDropdown from './Dropdown/FormatDropdown';
 import FontStyle from './fontSize/FontStyle';
 
-const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElement, setParentColor=()=>{}, setBoldText=()=>{},setTextTransform=()=>{}}) => {
+const Header = ({closePopup,changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElement, setParentColor=()=>{}, setBoldText=()=>{},setTextTransform=()=>{}}) => {
     const [selectedText,setSelectedText] = useState('');
     const [showColor, setShowColor] = useState(false);
     const [color, setColor] = useState("#aabbcc");
@@ -28,10 +28,13 @@ const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElem
 
 
     useEffect(()=>{
+
+        console.log({closePopupValueChanged : closePopup})
+
         setShowColor(false);
         setShowFontStyle(false);
         setShowFontSlider(false);
-    },[preview])
+    },[preview,closePopup])
 
     useEffect(()=>{
         if(!selectedElement)
