@@ -10,12 +10,10 @@ import { useSearchParams } from 'next/navigation'
 import PreviewImage from '@/components/PreviewImage';
 import PreviewImageOption from '@/components/PreviewImageOption';
 
-import Card from '@/components/card/card';
 import { DraggableBox } from '@/components/card/DraggableBox';
 import { ItemTypes } from  '../../components/card/ItemTypes';
 import { snapToGrid as doSnapToGrid } from '../../components/card/snapToGrid';
-import { useDrop } from 'react-dnd';
-import update from 'immutability-helper';
+import { useMultiDrop } from 'react-dnd-multi-backend';
 import { CustomDragLayer } from '@/components/card/CustomDragLayer';
 
 const TemplateEditor = ({snapToGrid=false}) => {
@@ -320,7 +318,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
     [textElements],
   )
 
-  const [, drop] = useDrop(
+  const [, {html5: [html5DropStyle, html5Drop], touch: [touchDropStyle, touchDrop]}] = useMultiDrop(
     () => ({
       accept: ItemTypes.BOX,
       drop(item, monitor) {
@@ -384,7 +382,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
      
         <div 
           id='invitation-card-main'
-          ref={drop}
+          ref={html5Drop}
           className="relative overflow-hidden image-container" >
           
           {
