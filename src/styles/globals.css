@@ -1148,11 +1148,19 @@ textarea {
   /* .main-wrap .text-format-controller-main+div {
     height: 100%;
   } */
+
+  .preview-options{
+    z-index: 5 !important;
+  }
 }
 
 @media (max-width: 767px) {
   .image-editor-shell {
     top: 0;
+  }
+
+  .preview-options{
+    z-index: 5 !important;
   }
 }
 

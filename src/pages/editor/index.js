@@ -30,34 +30,22 @@ const TemplateEditor = ({snapToGrid=false}) => {
   const image = selectedOccasion.images[0].url;
 
   
-  console.log({image, occasion,params});
+  console.log({image, occasion,params, selectedOccasion});
   const [textElements, setTextElements] = useState(selectedOccasion.dummyText || [
-    { id: 1, content: 'Sarah & Michael', x: 200, y: 100, fontSize: 32, color: '#000000', dragging: false, class:'' },
-    { id: 2, content: 'June 15, 2025', x: 200, y: 170, fontSize: 22, color: '#000000', dragging: false, class:'' },
-    { id: 3, content: 'Rosewood Gardens', x: 200, y: 230, fontSize: 18, color: '#3a3a3a', dragging: false, class:'' },
+    { id: 1, content: 'Sarah & Michael', x: 200, y: 100, fontSize: 32, color: '#000000', dragging: false, class:'',"style":"position:absolute;"  },
+    { id: 2, content: 'June 15, 2025', x: 200, y: 170, fontSize: 22, color: '#000000', dragging: false, class:'',"style":"position:absolute;"  },
+    { id: 3, content: 'Rosewood Gardens', x: 200, y: 230, fontSize: 18, color: '#3a3a3a', dragging: false, class:'',"style":"position:absolute;"  },
   ]);
   const [selectedElement, setSelectedElement] = useState(null);
   const editorRef = useRef(null);
   const [nextId, setNextId] = useState(selectedOccasion.dummyText.length+1);
 
-  useEffect(() => {
-    if (editorRef.current) {
-      console.log({editorRef: editorRef})
-      // Access and manipulate myRef.current here
-      console.log("Ref is available:", editorRef.current);
-      const element = editorRef.current;
+  
 
-      element.addEventListener("touchstart", handleTouchStart);
-      element.addEventListener("touchmove", handleTouchMove);
-      element.addEventListener("touchend", handleTouchEnd);
-      
-      return () => {
-        element.removeEventListener("touchstart", handleTouchStart);
-        element.removeEventListener("touchmove", handleTouchMove);
-        element.removeEventListener("touchend", handleTouchEnd);
-      };
-    }
-  }, []);
+  useEffect(()=>{
+    console.log({occasionChanged : occasion});
+    setTextElements(selectedOccasion.dummyText);
+  },[selectedOccasion])
 
   // Template backgrounds with built-in images
   const templates = {
@@ -67,101 +55,6 @@ const TemplateEditor = ({snapToGrid=false}) => {
     birthday1: { bg: 'bg-purple-50', label: 'Celebration Purple' },
     birthday2: { bg: 'bg-yellow-50', label: 'Festive Yellow' },
     birthday3: { bg: 'bg-green-50', label: 'Party Green' },
-  };
-
-  // Handle mouse down on a text element
-  const handleMouseDown = (e, id) => {
-    // Update the state to indicate which element is being dragged
-    setTextElements(elements => 
-      elements.map(el => 
-        el.id === id 
-          ? { ...el, dragging: true } 
-          : el
-      )
-    );
-    setSelectedElement(id);
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
-
-
-  const handleTouchStart = (e, id) => {
-    // Update the state to indicate which element is being dragged
-    setTextElements(elements => 
-      elements.map(el => 
-        el.id === id 
-          ? { ...el, dragging: true } 
-          : el
-      )
-    );
-    setSelectedElement(id);
-  };
-
-  // Handle mouse move when dragging
-  const handleMouseMove = (e) => {
-    if (editorRef.current) {
-      const editorRect = editorRef.current.getBoundingClientRect();
-      
-      setTextElements(elements => 
-        elements.map(el => {
-          if (el.dragging) {
-            // Calculate new position relative to the editor
-            const x = e.clientX - editorRect.left;
-            const y = e.clientY - editorRect.top;
-            
-            return { ...el, x, y };
-          }
-          return el;
-        })
-      );
-    }
-  };
-
-
-  const handleTouchMove = (e) => {
-    if (editorRef.current) {
-      const editorRect = editorRef.current.getBoundingClientRect();
-      
-      setTextElements(elements => 
-        elements.map(el => {
-          if (el.dragging) {
-            // Calculate new position relative to the editor
-            const x = e.clientX - editorRect.left;
-            const y = e.clientY - editorRect.top;
-            
-            return { ...el, x, y };
-          }
-          return el;
-        })
-      );
-    }
-  };
-
-  // Handle mouse up (end of drag)
-  const handleMouseUp = () => {
-    setTextElements(elements => 
-      elements.map(el => 
-        el.dragging ? { ...el, dragging: false } : el
-      )
-    );
-    
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
-  };
-
-
-   // Handle mouse up (end of drag)
-   const handleTouchEnd = () => {
-    setTextElements(elements => 
-      elements.map(el => 
-        el.dragging ? { ...el, dragging: false } : el
-      )
-    );
-    
-    const element = editorRef.current;
-    element.removeEventListener("touchmove", handleTouchMove);
-    element.removeEventListener("touchend", handleTouchEnd);
   };
 
   // Add a new text element
@@ -186,67 +79,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
     setTextElements([...textElements, newElement]);
     setSelectedElement(nextId);
     setNextId(nextId + 1);
-  };
-
-  // Remove a text element
-  const removeTextElement = (id) => {
-    setTextElements(elements => elements.filter(el => el.id !== id));
-    if (selectedElement === id) {
-      setSelectedElement(null);
-    }
-  };
-
-  // Update text content
-  const updateTextContent = (id, content) => {
-    setTextElements(elements => 
-      elements.map(el => 
-        el.id === id ? { ...el, content } : el
-      )
-    );
-  };
-
-  // Update text color
-  const updateTextColor = (id, color) => {
-    setTextElements(elements => 
-      elements.map(el => 
-        el.id === id ? { ...el, color } : el
-      )
-    );
-  };
-
-  // Update font size
-  const updateFontSize = (id, fontSize) => {
-    setTextElements(elements => 
-      elements.map(el => 
-        el.id === id ? { ...el, fontSize: parseInt(fontSize) } : el
-      )
-    );
-  };
-
-  // Handle occasion change
-  const handleOccasionChange = (e) => {
-    const newOccasion = e.target.value;
-    // setOccasion(newOccasion);
-    
-    // Set default template based on occasion
-    if (newOccasion === 'wedding') {
-      setTemplate('wedding1');
-      setTextElements([
-        { id: 1, content: 'Sarah & Michael', x: 200, y: 100, fontSize: 32, color: '#000000', dragging: false },
-        { id: 2, content: 'June 15, 2025', x: 200, y: 170, fontSize: 22, color: '#000000', dragging: false },
-        { id: 3, content: 'Rosewood Gardens', x: 200, y: 230, fontSize: 18, color: '#3a3a3a', dragging: false },
-      ]);
-    } else {
-      setTemplate('birthday1');
-      setTextElements([
-        { id: 1, content: 'Happy Birthday!', x: 200, y: 100, fontSize: 32, color: '#000000', dragging: false },
-        { id: 2, content: 'John turns 30', x: 200, y: 170, fontSize: 22, color: '#000000', dragging: false },
-        { id: 3, content: 'Saturday, April 12th at 7PM', x: 200, y: 230, fontSize: 18, color: '#3a3a3a', dragging: false },
-      ]);
-    }
-    setNextId(4);
-  };
-
+  }
 
   const changeFontFamily = (fontFamily)=>{
       const id = document.querySelector('.image-text-outline-highlighter')?.getAttribute('id');
@@ -270,22 +103,62 @@ const TemplateEditor = ({snapToGrid=false}) => {
 
   const setItalic = ()=>{
     const selectedElement = document.querySelector('.image-text-outline-highlighter');
-        if (selectedElement) {
-            let stle = window.getComputedStyle(selectedElement);
-           
-            let fontStyle = stle.getPropertyValue('font-style');
-            console.log({existingStyle : stle, fontStyle});
+    const id = document.querySelector('.image-text-outline-highlighter').getAttribute('id');
 
-            if(fontStyle && fontStyle!=='normal'){
-                document.querySelector('.image-text-outline-highlighter').style.removeProperty('font-style');
-            }
-            else{
-                document.querySelector('.image-text-outline-highlighter').style.fontStyle = 'italic';
-            }
+    if (selectedElement) {
+          setTextElements(elements => 
+            elements.map(el => 
+              {
+                  if(Number(el.id) === Number(id)){
+                    el.italic = !el.italic ? true : false;
+                  }
+                  return el;
+              }
+            )
+          );
         }
         else {
             alert('Please select element')
         }
+  }
+
+
+  const setBoldText = (text)=>{
+    const selectedElement = document.querySelector('.image-text-outline-highlighter');
+    const id = document.querySelector('.image-text-outline-highlighter').getAttribute('id');
+
+    if (selectedElement) {
+          setTextElements(elements => 
+            elements.map(el => 
+              {
+                  if(Number(el.id) === Number(id)){
+                    el.content = text;
+                  }
+                  return el;
+              }
+            )
+          );
+        }
+        else {
+            alert('Please select element')
+        }
+  }
+
+  const setTextTransform = (value)=>{
+    const id = document.querySelector('.image-text-outline-highlighter').getAttribute('id');
+
+    console.log({textTransformCalled: value});
+
+    setTextElements(elements => 
+      elements.map(el => 
+        {
+            if(Number(el.id) === Number(id)){
+              el.textTransform = value;
+            }
+            return el;
+        }
+      )
+    );
   }
 
   const disablePreviewFn = ()=>{
@@ -297,6 +170,24 @@ const TemplateEditor = ({snapToGrid=false}) => {
     console.log({parentPreviewChanged : preview});
   },[preview])
 
+  const setColor = (color)=>{
+    console.log({colorChanged: color});
+
+      if(color && document.querySelector('.image-text-outline-highlighter')){
+          const id = document.querySelector('.image-text-outline-highlighter').getAttribute('id');
+          let styles = document.querySelector('.image-text-outline-highlighter').getAttribute('style');
+          // styles = styles+`color:${color};`          
+
+          console.log({stylesToUpdate: styles});
+
+          setTextElements(elements => 
+            elements.map(el => 
+              Number(el.id) === Number(id) ? { ...el, color} : el
+            )
+          );
+      }
+  }
+
   const moveBox = useCallback(
     (id, left, top) => {
 
@@ -304,7 +195,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
 
       setTextElements(elements => 
         elements.map(el => {
-          if (el.id===id) {
+          if (Number(el.id)===Number(id)) {
             // Calculate new position relative to the editor
             const x = left //e.clientX - editorRect.left;
             const y = top //e.clientY - editorRect.top;
@@ -340,7 +231,7 @@ const TemplateEditor = ({snapToGrid=false}) => {
   const selectElement = (id)=>{
 
     console.log({selectElementCalled: id});
-
+    setSelectedElement(id);
     setTextElements(elements => 
       elements.map(el => {
         if (el.id===id) {
@@ -365,8 +256,11 @@ const TemplateEditor = ({snapToGrid=false}) => {
           top={el.y}
           left={el.x}
           onClick={selectElement}
+          italic={el.italic}
           className={el.class}
           style={el.style}
+          color={el.color}
+          textTransform={el.textTransform}
           title={el.content}
         />
     )
@@ -376,14 +270,37 @@ const TemplateEditor = ({snapToGrid=false}) => {
     <>
     <div class="main-wrap" id="main-page">
     <div class="flex-container"></div>
-    <Header changeFontFamily={changeFontFamily} setItalic={setItalic} preview={preview} selectedElement={selectedElement}/>
+    <Header changeFontFamily={changeFontFamily} 
+    setItalic={setItalic} 
+    setBoldText={setBoldText}
+    setParentColor={setColor}
+    setTextTransform={setTextTransform}
+    preview={preview} 
+    selectedElement={selectedElement}/>
     <div className="invite-main-wrap">
       <div className="image-editor-shell">
      
         <div 
           id='invitation-card-main'
           ref={html5Drop}
-          className="relative overflow-hidden image-container" >
+          className="full-view relative overflow-hidden image-container" >
+          
+          {
+            !preview && <TemplateImage image={image}/>
+          }
+                    
+          {
+            preview && <PreviewImage image={image}/>
+          }
+          {textElements.map((el,i) => (
+           renderCard(el,i)
+          ))}
+        </div>
+
+        <div 
+          id='invitation-card-main'
+          ref={touchDrop}
+          className="mobile-view relative overflow-hidden image-container" >
           
           {
             !preview && <TemplateImage image={image}/>
@@ -404,6 +321,8 @@ const TemplateEditor = ({snapToGrid=false}) => {
           preview && <PreviewImageOption setParentPreview={disablePreviewFn}/>
         }
       </div>
+
+      
     </div>
     <Footer addText={addTextElement} setParentPreview={setPreview}/>
     </div>

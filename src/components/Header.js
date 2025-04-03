@@ -12,7 +12,7 @@ import RangerSlider from './slider/RangerSlider';
 import FormatDropdown from './Dropdown/FormatDropdown';
 import FontStyle from './fontSize/FontStyle';
 
-const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElement}) => {
+const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElement, setParentColor=()=>{}, setBoldText=()=>{},setTextTransform=()=>{}}) => {
     const [selectedText,setSelectedText] = useState('');
     const [showColor, setShowColor] = useState(false);
     const [color, setColor] = useState("#aabbcc");
@@ -76,10 +76,12 @@ const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElem
             const isBold = document.querySelector('.image-text-outline-highlighter').innerHTML.includes('<b>') ? true : false;
 
             if (isBold) {
-                document.querySelector('.image-text-outline-highlighter').innerHTML = text;
+                // document.querySelector('.image-text-outline-highlighter').innerHTML = text;
+                setBoldText(text);
             }
             else {
-                document.querySelector('.image-text-outline-highlighter').innerHTML = `<b>${text}</b>`
+                // document.querySelector('.image-text-outline-highlighter').innerHTML = `<b>${text}</b>`
+                setBoldText(`<b>${text}</b>`);
             }
         }
         else {
@@ -107,11 +109,10 @@ const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElem
             console.log({existingStyle : stle,textTransform});
 
             if(textTransform && textTransform!=='none'){
-                document.querySelector('.image-text-outline-highlighter').style.removeProperty('text-transform');
+                setTextTransform('');
             }
             else{
-                document.querySelector('.image-text-outline-highlighter').style.removeProperty('text-transform');
-                document.querySelector('.image-text-outline-highlighter').style.textTransform = 'uppercase';
+                setTextTransform('uppercase');
             }
         }
         else {
@@ -160,11 +161,10 @@ const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElem
         console.log({showSlider : case1});
     }
 
-    useEffect(()=>{
-        if(color && document.querySelector('.image-text-outline-highlighter')){
-            document.querySelector('.image-text-outline-highlighter').style.color = color;
-        }
-    },[color])
+    const onChangeColor = (info)=>{
+        setColor(info);
+        setParentColor(info);
+    }
 
     return (
         <>
@@ -222,7 +222,7 @@ const Header = ({changeFontFamily=()=>{},setItalic=()=>{}, preview, selectedElem
         </div>
 
          {
-            showColor && <HexColorPicker color={color} onChange={setColor} />
+            showColor && <HexColorPicker color={color} onChange={onChangeColor} />
          } 
 
          {

@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-function captureAndDownloadElement() {
-    let htmlElement = document.getElementById('invitation-card-main');
+function captureAndDownloadElement(isDesktopView) {
+    let htmlElement = isDesktopView ? document.querySelector('#invitation-card-main.full-view') : document.querySelector('#invitation-card-main.mobile-view');
     html2canvas(htmlElement).then(canvas=>{
         const image = canvas.toDataURL("image/png");
    
         let link = document.createElement('a');
-        link.download = 'my-image-name.png';
+        link.download = 'download.png';
         link.href = image;
         link.click();
     })
@@ -30,7 +30,8 @@ function captureParentDivWithImagesToPDF(
     filename = 'download.pdf',
     format = 'a4',
     orientation = 'portrait',
-    margin = 10
+    margin = 10,
+    isDesktopView
 ) {
     // Make sure all images are loaded before capturing
     const images = parentElement.querySelectorAll('img');
@@ -103,46 +104,59 @@ function captureParentDivWithImagesToPDF(
 
 const PreviewImageOption = ({image=null, setParentPreview=()=>{}}) => {
       const [scale,setScale] = useState(1);
+      const element = document.querySelector('.image-container.full-view');
+      const mobileView= document.querySelector('.image-container.mobile-view');
+
+      const isDesktopView = window.getComputedStyle(element)['display'] ==='none' ? false : true;
+
+      const updateScale = (upScale)=>{
+        if(isDesktopView){
+            element.style.transform = `scale(${upScale})`;
+        }
+        else{
+            mobileView.style.transform = `scale(${upScale})`;
+        }
+      }
 
           const zoomIn = ()=>{
                 setScale(scale+0.1);
-                document.querySelector('.image-container').style.transform = `scale(${scale})`;
+                
+                updateScale(scale);
             }
-        
         
             const zoomOut = ()=>{
                 setScale(scale-0.1);
-                document.querySelector('.image-container').style.transform = `scale(${scale})`;
+                updateScale(scale);
             }
         
         
             const resetScale = ()=>{
                 setScale(1);
-                document.querySelector('.image-container').style.transform = `scale(${scale})`;
+                updateScale(scale);
             }
 
-
-            const downloadImage = () => captureAndDownloadElement();
+            const downloadImage = () => captureAndDownloadElement(isDesktopView);
         
             const downloadImageAsPdf = () => {
-                const input = document.querySelector(".image-container");
+                const input = isDesktopView ?  element : mobileView;
                 //captureDivToPDF(input, 'div-content.pdf', 'a4', 'portrait');
         
                 captureParentDivWithImagesToPDF(
                     input,
-                    'parent-div-with-images.pdf',
+                    'download.pdf',
                     'a4',
                     'portrait',
-                    10 // 10mm margin
+                    10, // 10mm margin,
+                    isDesktopView
                 );
             }
         
       return (
         <>
              <div class="preview-options">
-                    <a className="btn zoom" onClick={()=>zoomIn()}><i className="fas fa-search-plus"></i></a>
-                    <a className="btn zoom-out" onClick={()=>zoomOut()}><i className="fas fa-search-minus"></i></a>
-                    <a className="btn zoom-init" onClick={()=>resetScale()}><i class="fas fa-recycle"></i></a>
+                  <Button className="btn zoom" onClick={()=>zoomIn()}><i className="fas fa-search-plus"></i></Button>
+                      <Button className="btn  zoom-out" onClick={()=>zoomOut()}><i className="fas fa-search-minus"></i></Button>
+                      <Button className="btn  zoom-init" onClick={()=>resetScale()}><i class="fas fa-recycle"></i></Button>
                     <Button className="btn" onClick={() => downloadImage()}>
                             <FontAwesomeIcon icon={faFileDownload} className="" title="Download Png Image" />
                     </Button>

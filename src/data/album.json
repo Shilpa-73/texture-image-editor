@@ -5,9 +5,9 @@
             { "id": 3, "url": "/image/BlossomBeauty.webp", "name": "wedding" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false }
+            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false, "style":"position:absolute;" },
+            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false ,"style":"position:absolute;" }
         ],
         "newTextPosition":{
             "x":200,
@@ -20,9 +20,9 @@
             { "id": 3, "url": "/image/BlossomBeauty.webp", "name": "wedding" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false }
+            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false ,"style":"position:absolute;" },
+            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  }
         ],
         "newTextPosition":{
             "x":200,
@@ -35,12 +35,12 @@
             { "id": 1, "url": "/image/babyShower.jpeg", "name": "Baby Shower" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Mom & Dad to be soon!", "x": 99, "y": 316, "fontSize": "1rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "It's a baby girl", "x": 143, "y": 370, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 51, "y": 407, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false },
+            { "id": 1, "content": "Mom & Dad to be soon!", "x": 99, "y": 316, "fontSize": "1rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 2, "content": "It's a baby girl", "x": 143, "y": 370, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 51, "y": 407, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  },
             {
                 "content":"Palace function hall, 4th cross road, CMB layout, opp. lotus garden 1234567",
-                "id": 4, "x": 37, "y": 477, "fontSize": "0.6rem", "color": "#3a3a3a", "dragging": false
+                "id": 4, "x": 37, "y": 477, "fontSize": "0.6rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;" 
             }
         ],
         "newTextPosition":{
@@ -54,9 +54,9 @@
             { "id": 2, "url": "/image/birthdayParty.jpeg", "name": "Birthday party" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Happy Birthday!", "x": 153, "y": 353, "fontSize": "1rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "John turns 30", "x": 156, "y": 403, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 66, "y": 463, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false }
+            { "id": 1, "content": "Happy Birthday!", "x": 153, "y": 353, "fontSize": "1rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 2, "content": "John turns 30", "x": 156, "y": 403, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 66, "y": 463, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  }
         ],
         "newTextPosition":{
             "x":200,
@@ -69,9 +69,9 @@
             { "id": 3, "url": "/image/BlossomBeauty.webp", "name": "wedding" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false }
+            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  }
         ],
         "newTextPosition":{
             "x":200,
@@ -84,9 +84,9 @@
             { "id": 3, "url": "/image/BlossomBeauty.webp", "name": "wedding" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false }
+            { "id": 1, "content": "Sarah & Michael", "x": 114, "y": 158, "fontSize": "1.5rem", "color": "#000000", "dragging": false ,"style":"position:absolute;" },
+            { "id": 2, "content": "June 15, 2025", "x": 140, "y": 232, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Rosewood Gardens", "x": 136, "y": 299, "fontSize": "0.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  }
         ],
         "newTextPosition":{
             "x":200,
@@ -99,12 +99,12 @@
             { "id": 1, "url": "/image/babyShower.jpeg", "name": "Baby Shower" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Mom & Dad to be soon!", "x": 99, "y": 316, "fontSize": "1rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "It's a baby girl", "x": 143, "y": 370, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 51, "y": 407, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false },
+            { "id": 1, "content": "Mom & Dad to be soon!", "x": 99, "y": 316, "fontSize": "1rem", "color": "#000000", "dragging": false ,"style":"position:absolute;" },
+            { "id": 2, "content": "It's a baby girl", "x": 143, "y": 370, "fontSize": "0.75rem", "color": "#000000", "dragging": false ,"style":"position:absolute;" },
+            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 51, "y": 407, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  },
             {
                 "content":"Palace function hall, 4th cross road, CMB layout, opp. lotus garden 1234567",
-                "id": 4, "x": 37, "y": 477, "fontSize": "0.6rem", "color": "#3a3a3a", "dragging": false
+                "id": 4, "x": 37, "y": 477, "fontSize": "0.6rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;" 
             }
         ],
         "newTextPosition":{
@@ -118,9 +118,9 @@
             { "id": 2, "url": "/image/birthdayParty.jpeg", "name": "Birthday party" }
         ],
         "dummyText":[
-            { "id": 1, "content": "Happy Birthday!", "x": 153, "y": 353, "fontSize": "1rem", "color": "#000000", "dragging": false },
-            { "id": 2, "content": "John turns 30", "x": 156, "y": 403, "fontSize": "0.75rem", "color": "#000000", "dragging": false },
-            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 66, "y": 463, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false }
+            { "id": 1, "content": "Happy Birthday!", "x": 153, "y": 353, "fontSize": "1rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 2, "content": "John turns 30", "x": 156, "y": 403, "fontSize": "0.75rem", "color": "#000000", "dragging": false,"style":"position:absolute;"  },
+            { "id": 3, "content": "Saturday, April 12th at 7PM", "x": 66, "y": 463, "fontSize": "1.5rem", "color": "#3a3a3a", "dragging": false,"style":"position:absolute;"  }
         ],
         "newTextPosition":{
             "x":200,
